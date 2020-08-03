@@ -2,7 +2,7 @@
 const carrito = document.getElementById('carrito');
 const cursos = document.getElementById('lista-cursos');
 const listaCursos = document.querySelector('#lista-carrito tbody');
-
+const vaciarCarritoBtn = document.getElementById('vaciar-carrito');
 
 
 
@@ -15,8 +15,11 @@ function cargarEventListeners() {
     // Dispara cuando se presiona el boton agregar carrito
     cursos.addEventListener('click', comprarCurso);
 
-    // CUando se elimina un curso del carrito
+    // Cuando se elimina un curso del carrito
     carrito.addEventListener('click', eliminarCurso);
+
+    // Al vaciar el carrito
+    vaciarCarritoBtn.addEventListener('click', vaciarCarrito);
 }
 
 
@@ -84,4 +87,22 @@ function eliminarCurso(e) {
         // console.log(e.target.parentElement.parentElement);
         e.target.parentElement.parentElement.remove();
     }
+}
+
+/// Elimina todos los cursos del carrito en el DOM
+function vaciarCarrito(e) {
+    //Forma lenta
+    // listaCursos.innerHTML = '';
+
+    //Forma rapida y recomendada
+    
+    while (listaCursos.firstChild) {
+        // console.log(listaCursos.firstChild);
+        listaCursos.removeChild(listaCursos.firstChild);
+    }
+    // console.log(listaCursos.firstChild);
+
+    //Este return es para que cuando elimine los cursos con el boton no haga ese salto en la pagina
+    return false;
+    
 }
